@@ -1,9 +1,9 @@
-# RepositoryNook-UI
+# DevOpsGenie-UI
 
-RepositoryNook-UI was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.3.6.
-It is a front-end to the RepositoryNook Microservice meant to exercise the service's REST API and demonstrate data (JSON data) storage into a NoSQL repository (hosted Mongo/Atlas)
+DevOpsGenie-UI was generated with [Angular CLI](https://github.com/angular/angular-cli) updated to version 8.*
+It is a front-end to the DevOpsGenie Microservice, providing user functionality with a Material design flare.
 
-## Development server
+## Interactive Development server
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
 
