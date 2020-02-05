@@ -1,0 +1,21 @@
+<div fxLayout="row" fxLayoutAlign="center center">
+  <mat-card fxFlex.xs="100" fxFlex.sm="80" fxFlex.gt-sm="60">
+      <mat-card-header>
+          <mat-card-title>Docker Image Registry</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+          <div fxLayout="column" fxLayoutGap="14px grid">
+            <mat-form-field fxFlex="70">
+                  <mat-nav-list name="registrySelect" placeholder="registry" [(ngModel)]="settings.registry">
+                      <mat-option *ngFor="let registry of registries" [value]="registry.name">
+                        {{collection.name}}
+                      </mat-option>
+                  </mat-nav-list>
+            </mat-form-field>
+          </div>
+      </mat-card-content>
+      <mat-card-actions align="end"> 
+          <button mat-raised-button color="primary" [routerLink]="['/home']" (click)="onChangeDatabaseSelection()">OK</button>
+      </mat-card-actions>
+  </mat-card>
+</div>

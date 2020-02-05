@@ -9,7 +9,7 @@ import { Component, OnInit } from '@angular/core';
 export class AppComponent implements OnInit {
 
   navItems: any[] = [
-    { path: '/repository', title: 'Repository'},
+    { path: '/registry', title: 'Registry'},
     { path: '/documents', title: 'Documents'}
   ]
 

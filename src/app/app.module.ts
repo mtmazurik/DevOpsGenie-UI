@@ -12,7 +12,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { AppComponent } from './app.component';
 import { ConfigComponent } from './components/configuration/configuration.component';
 import { HomeComponent } from './components/home/home.component';
-import { RepositoryComponent } from './components/repository/repository.component';
+import { RegistryComponent } from './components/registry/registry.component';
 import { AuthenticationService } from './core/services/authentication.service';
 import { ConfigurationService } from './core/services/configuration.service';
 import { APIRepositoryNookService } from './core/services/api-repository-nook.service';
@@ -26,7 +26,7 @@ import { HelpComponent } from './components/help/help.component';
     AppComponent,
     HomeComponent,
     ConfigComponent,
-    RepositoryComponent,
+    RegistryComponent,
     SearchComponent,
     DocumentComponent,
     DocumentsComponent,
