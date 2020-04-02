@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { ConfigurationModel } from '../../core/models/configuration.model';
 import { ConfigurationService } from '../../core/services/configuration.service';
 import { APIRepositoryNookService } from 'src/app/core/services/api-repository-nook.service';
+import { APIDockerService } from 'src/app/core/services/api-docker.service';
 
 @Component({
     templateUrl: './configuration.component.html',
@@ -12,7 +13,9 @@ export class ConfigComponent implements OnInit {
 
     configuration: ConfigurationModel;
 
-    constructor(public configSvc: ConfigurationService, public repositoryNook: APIRepositoryNookService) { } 
+    constructor(public configSvc: ConfigurationService
+              , public repositoryNook: APIRepositoryNookService
+              , public docker: APIDockerService) { } 
 
     hide: boolean;
 
@@ -20,11 +23,15 @@ export class ConfigComponent implements OnInit {
         this.configuration = this.configSvc.settings;
     }
 
-    onPingClick() { 
+    onRepositoryPingClick() { 
         this.repositoryNook.Ping();
     }
-    onGetVersionClick(){
+    onRepositoryGetVersionClick(){
         this.repositoryNook.GetVersion();
+    }
+
+    onDockerPingClick() {
+        this.docker.Ping();
     }
 
     onChange() {

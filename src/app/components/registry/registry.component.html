@@ -6,7 +6,7 @@
       <mat-card-content>
           <div fxLayout="column" fxLayoutGap="14px grid">
             <mat-form-field fxFlex="70">
-                  <mat-nav-list name="registrySelect" placeholder="registry" [(ngModel)]="settings.registry">
+                  <mat-nav-list name="registrySelect" placeholder="registry">
                       <mat-option *ngFor="let registry of registries" [value]="registry.name">
                         {{collection.name}}
                       </mat-option>
@@ -15,7 +15,7 @@
           </div>
       </mat-card-content>
       <mat-card-actions align="end"> 
-          <button mat-raised-button color="primary" [routerLink]="['/home']" (click)="onChangeDatabaseSelection()">OK</button>
+          <button mat-raised-button color="primary" [routerLink]="['/home']">OK</button>
       </mat-card-actions>
   </mat-card>
 </div>

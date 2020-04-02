@@ -6,14 +6,17 @@ import { DBConnection } from 'auth0-js';
 
 export const environment = {
   production: false,
-  serviceAddress: "http://reponook-svc.cloudcomputingassociates.net",
-  servicePort: 80,
-  auth0ClientId: "Tl3SnziPkp4qRjRuajZWfrAeMn6Dxwr6",
-  auth0ClientSecret: "Ep36WseJFCSnU5IsMdDxJh_JKyhlyKDfw0_epmihC4JroW1SvVtvDa9BHuwDGPMJ",
-  auth0Audience: "endpoint-security.containernooks.com",
-  auth0GrantType: "client_credentials",
-  database: "public",
-  collection: "testdata"
+  
+  // moved config info to: mongodb,  dog-ui database in reponook, configuration collection
+  
+  // serviceAddress: "http://reponook-svc.cloudcomputingassociates.net",      
+  // servicePort: 80,
+  // auth0ClientId: "Tl3SnziPkp4qRjRuajZWfrAeMn6Dxwr6",
+  // auth0ClientSecret: "Ep36WseJFCSnU5IsMdDxJh_JKyhlyKDfw0_epmihC4JroW1SvVtvDa9BHuwDGPMJ",
+  // auth0Audience: "endpoint-security.containernooks.com",
+  // auth0GrantType: "client_credentials",
+  // database: "public",
+  // collection: "testdata"
 };
 
 /*

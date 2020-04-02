@@ -7,6 +7,9 @@ import { HelpComponent } from './components/help/help.component';
 import { DocumentComponent } from './components/subcomponents/document/document.component';
 import { SearchComponent } from './components/subcomponents/search/search.component';
 import { RegistryComponent } from './components/registry/registry.component';
+import { ProfileComponent } from './profile/profile.component';
+import { AuthGuard } from './core/services/auth/auth.guard';
+import { LoginComponent } from './components/login/login.component';
 
 
 const routes: Routes = [
@@ -16,8 +19,11 @@ const routes: Routes = [
           data: { title: 'RepositoryNook UI', leftNavBar: true} },
   { path: 'config', component: ConfigComponent,
           data: { title: 'Configuration', leftNavBar: false} },
+  { path: 'login', component: LoginComponent,
+          data: { title: 'Auth0 Login', leftNavBar: false}},
   { path: 'help', component: HelpComponent,
           data: { title: 'Help', leftNavBar: false} },
+  { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard] },
   { path: 'registry', component: RegistryComponent,
           data: { title: 'Registry selection', leftNavBar: false} },
   { path: 'documents', 

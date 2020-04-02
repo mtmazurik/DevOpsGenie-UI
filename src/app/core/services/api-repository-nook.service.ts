@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { NotificationService } from './notification.service';
-import { AuthenticationService } from './authentication.service';
 import { ConfigurationService } from './configuration.service';
 import { Database } from '../models/api/database';
 import { Collection } from '../models/api/collection';
@@ -15,17 +14,21 @@ import { Observable } from 'rxjs';
 
 export class APIRepositoryNookService {
 
-  constructor(public httpClient: HttpClient, public auth:AuthenticationService, public config:ConfigurationService, public notify:NotificationService) { 
+  readonly DATABASE:string = "tenant";
+  readonly COLLECTION:string = "config";
+
+  constructor( public httpClient: HttpClient
+             , public config:ConfigurationService
+             , public notify:NotificationService) { 
   }
 
   response:Response;
   databases:Database[];
   collections: Collection[];
-
   repositoryItems: Repository[];
 
   CreateNew(repository:Repository) : Promise<Repository> {
-    let uri: string = this.baseURI() + "/" + this.config.settings.database + "/" + this.config.settings.collection;
+    let uri: string = this.baseURI() + "/" + this.DATABASE + "/" + this.COLLECTION; 
     let reqBody = JSON.stringify(repository);
 
     let promise = new Promise<Repository>((resolve, reject) => {
@@ -34,7 +37,7 @@ export class APIRepositoryNookService {
                           { 
                             responseType: 'text', 
                             headers: new HttpHeaders()
-                                .set("Authorization", `Bearer ${this.auth.token}`)
+                                //.set("Authorization", `Bearer ${this.auth.token}`)
                                 .set("Content-Type", "application/json")                 
                             })
             .toPromise()
@@ -50,13 +53,14 @@ export class APIRepositoryNookService {
       });
       return promise;
   }
+
   GetAll() : Observable<Repository[]> {
-    let uri: string= this.baseURI() + "/" + this.config.settings.database + "/" + this.config.settings.collection; 
+    let uri: string= this.baseURI() + "/" + this.DATABASE + "/" + this.COLLECTION; 
     this.repositoryItems = [];
     this.httpClient
-    .get(uri, { responseType: 'text', 
-                headers: new HttpHeaders()
-                    .set("Authorization", `Bearer ${this.auth.token}`)
+    .get(uri, { responseType: 'text' //, 
+/*                 headers: new HttpHeaders()
+                    .set("Authorization", `Bearer ${this.auth.token}`) */
     })
     .subscribe( body => {
                   this.response = JSON.parse(body) as Response;
@@ -78,9 +82,9 @@ export class APIRepositoryNookService {
     let uri: string = this.baseURI();
     this.databases = [];
     this.httpClient
-      .get(uri, { responseType: 'text', 
-                  headers: new HttpHeaders()
-                      .set("Authorization", `Bearer ${this.auth.token}`)
+      .get(uri, { responseType: 'text' //, 
+/*                   headers: new HttpHeaders()
+                      .set("Authorization", `Bearer ${this.auth.token}`) */
       })
       .subscribe( body => {
                     this.response = JSON.parse(body) as Response;
@@ -97,14 +101,15 @@ export class APIRepositoryNookService {
     });
     return databasesObservable;
   }
+  
   GetCollections() : Observable<any> {
-    let uri: string = this.baseURI() + "/" + this.config.settings.database;
+    let uri: string = this.baseURI() + "/" + this.DATABASE;
     this.collections = [];
     this.httpClient
       .get(uri, { 
-                  responseType: 'json', 
-                  headers: new HttpHeaders()
-                      .set("Authorization", `Bearer ${this.auth.token}`)
+                  responseType: 'json' //, 
+/*                   headers: new HttpHeaders()
+                      .set("Authorization", `Bearer ${this.auth.token}`) */
       })
       .subscribe( body => {
                     this.response = body as Response;
@@ -128,16 +133,16 @@ export class APIRepositoryNookService {
           .get(uri, {responseType: "text"})
           .subscribe( 
               respBody => this.notify.open(respBody, 'info', 3),
-              error => this.notify.open('GET Ping error. Check REST URI and port number and  retry.', 'error')
+              error => this.notify.open('Ping error. Check Repository URI and port number and  retry.', 'error')
           );
   }
 
   GetVersion(){ // Authenticated
       let uri:string = this.config.settings.serviceAddress + ':' + this.config.settings.servicePort + '/admin/version';   
       this.httpClient
-          .get(uri, { responseType: "text", 
-                      headers: new HttpHeaders()
-                          .set("Authorization", `Bearer ${this.auth.token}`)
+          .get(uri, { responseType: "text" //, 
+/*                       headers: new HttpHeaders()
+                          .set("Authorization", `Bearer ${this.auth.token}`) */
                     })
           .subscribe( 
               respBody => this.notify.open(respBody,'info',3),

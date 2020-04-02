@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { APIDocker } from 'src/app/core/services/api-docker.service';
+import { APIDockerService } from 'src/app/core/services/api-docker.service';
 import { ConfigurationService } from '../../core/services/configuration.service';
 import { ConfigurationModel } from 'src/app/core/models/configuration.model';
 import { Registry } from 'src/app/core/models/api/registry';
@@ -12,16 +12,12 @@ import { Registry } from 'src/app/core/models/api/registry';
 export class RegistryComponent implements OnInit {
 
   registries: Registry[];
-  settings: ConfigurationModel;
 
-  constructor( public configSvc:ConfigurationService, public api:APIDocker) { 
+  constructor( public api:APIDockerService) { 
   }
 
   ngOnInit() {
-    
-    this.settings = this.configSvc.settings;
-
-    
+       
     this.api.GetRegistries().subscribe(
           (registries: Registry[]) => { this.registries = registries; }
         );

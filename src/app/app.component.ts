@@ -14,6 +14,7 @@ export class AppComponent implements OnInit {
   ]
 
   moreEllipsisItems: any[] = [
+    { path: '/login' },
     { path: '/config' },
     { path: '/help' }
   ]

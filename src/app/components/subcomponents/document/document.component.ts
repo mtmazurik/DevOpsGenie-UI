@@ -35,8 +35,6 @@ export class DocumentComponent implements OnInit {
 
   
   ngOnInit() {
-    this.database = this.settings.database;
-    this.collection = this.settings.collection;
   }
 
   onSaveClick() {
@@ -44,8 +42,6 @@ export class DocumentComponent implements OnInit {
       repositoryObject._id= (this.id === "") ? null : this.id;
       repositoryObject.key = this.key;
       repositoryObject.app = this.app; 
-      repositoryObject.repository = this.database;
-      repositoryObject.collection = this.collection;
       repositoryObject.validate = (this.validateEnabled) ? true : false;
       repositoryObject.schemaUri = (this.schemaURI) ? this.schemaURI : "";
       repositoryObject.data = this.innerData;

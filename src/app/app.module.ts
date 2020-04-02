@@ -13,24 +13,30 @@ import { AppComponent } from './app.component';
 import { ConfigComponent } from './components/configuration/configuration.component';
 import { HomeComponent } from './components/home/home.component';
 import { RegistryComponent } from './components/registry/registry.component';
-import { AuthenticationService } from './core/services/authentication.service';
+import { AuthService } from './core/services/auth/auth.service';
 import { ConfigurationService } from './core/services/configuration.service';
 import { APIRepositoryNookService } from './core/services/api-repository-nook.service';
 import { SearchComponent } from './components/subcomponents/search/search.component';
 import { DocumentComponent } from './components/subcomponents/document/document.component';
 import { DocumentsComponent } from './components/documents/documents.component';
 import { HelpComponent } from './components/help/help.component';
+import { ProfileComponent } from './profile/profile.component';
+import { NavBarComponent } from './components/navbar/navbar.component';
+import { LoginComponent } from './components/login/login.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     ConfigComponent,
+    ProfileComponent,
     RegistryComponent,
     SearchComponent,
     DocumentComponent,
     DocumentsComponent,
-    HelpComponent
+    HelpComponent,
+    NavBarComponent,
+    LoginComponent
   ],
   imports: [
     AppRoutingModule,
@@ -70,7 +76,7 @@ import { HelpComponent } from './components/help/help.component';
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA], // CUSTOM_ELEMENTS_SCHEMA allows the templateUrl to work
   providers: [
-    AuthenticationService,
+    AuthService,
     ConfigurationService,
     APIRepositoryNookService
   ],

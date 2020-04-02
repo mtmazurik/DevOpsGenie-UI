@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { NotificationService } from './notification.service';
-import { AuthenticationService } from './authentication.service';
 import { ConfigurationService } from './configuration.service';
 import { Registry } from '../models/api/registry';
 import { Response } from '../models/api/response';
@@ -11,9 +10,11 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 
-export class APIDocker {
+export class APIDockerService {
 
-  constructor(public httpClient: HttpClient, public auth:AuthenticationService, public config:ConfigurationService, public notify:NotificationService) { 
+  constructor( public httpClient: HttpClient
+             , public config:ConfigurationService
+             , public notify:NotificationService) { 
   }
 
   response:Response;
@@ -23,13 +24,13 @@ export class APIDocker {
   // Get Registries - makes a local call to the Docker for Windows local image registry, gets all information for the locally installed images
   //
   GetRegistries() : Observable<any> {
-    let uri: string = this.baseURI() + "/" + this.config.settings.database;   // what is the host:port to call here ?
+    let uri: string = this.baseURI() + "/v1.18/images/json?all=1 HTTP/1.1";   // hardcoded for local
     this.registries = [];
     this.httpClient
       .get(uri, { 
                   responseType: 'json', 
-                  headers: new HttpHeaders()
-                      .set("Authorization", `Bearer ${this.auth.token}`)
+                  // headers: new HttpHeaders()
+                  //     .set("Authorization", `Bearer ${this.auth.token}`)
       })
       .subscribe( body => {
                     this.response = body as Response;
@@ -47,17 +48,21 @@ export class APIDocker {
     return registriesObservable;
   }
 
-  Ping(){ // non-Authenticated
-      let uri:string =  this.baseURI() + '/admin/ping';   
+  Ping(){ 
+      let uri:string =  this.baseURI() + '/v1.18/_ping';   
       this.httpClient
-          .get(uri, {responseType: "text"})
+          .get(uri, {responseType: "text",
+                     headers: new HttpHeaders()
+                     .set("Access-Control-Allow-Headers","Origin, Accept, X-Requested-With, Content-Type")
+                     .set("Access-Control-Allow-Origin", "*")
+                      })
           .subscribe( 
               respBody => this.notify.open(respBody, 'info', 3),
-              error => this.notify.open('GET Ping error. Check REST URI and port number and  retry.', 'error')
+              error => this.notify.open('Ping error. Check Docker Engine URI and port number and  retry.', 'error')
           );
   }
 
   private baseURI() {
-    return this.config.settings.serviceAddress + ':' + this.config.settings.servicePort;
+    return this.config.settings.imageRegistryURI + ':' + this.config.settings.imageRegistryPort;
   }
 }

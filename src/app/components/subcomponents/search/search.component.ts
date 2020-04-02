@@ -10,14 +10,12 @@ import { Repository } from '../../../core/models/api/repository'
 })
 export class SearchComponent implements OnInit {
 
-  repositorySetting: string;      // display the db\collection being referenced
   filter: string;                 // did the user type in a filter (either a key (name:value) or a tag (name:value) )
   repositoryItems: Repository[];  // returned Repo items
 
   documentsColumn = ['documents']; //['_id', 'key', 'data']; // column headings
 
   constructor(public configSvc: ConfigurationService, public api: APIRepositoryNookService) {
-      this.repositorySetting = configSvc.settings.database + '/' + configSvc.settings.collection;
    }
 
   ngOnInit() {
