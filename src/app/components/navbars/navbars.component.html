@@ -1,0 +1,27 @@
+  <mat-toolbar color="primary">
+    <button mat-button (click)="sidenav.toggle()" ><mat-icon>menu</mat-icon></button>
+    <button mat-button class="app-title" [routerLink]="['/home']">DevOpsGenie</button>
+    <span class="example-spacer"></span>
+    <button mat-icon-button [matMenuTriggerFor]="moreMenu" aria-label="Settings">
+      <mat-icon>more_vert</mat-icon>
+    </button>
+  </mat-toolbar>
+  <mat-menu #moreMenu="matMenu" >
+    <a mat-menu-item (click)="loginClicked()" *ngIf="!(authService.isAuthenticated$ | async)"><mat-icon>security</mat-icon>Login</a>
+    <a mat-menu-item (click)="logoffClicked()" *ngIf="authService.isAuthenticated$ | async"><mat-icon>security</mat-icon>Logout</a>
+    <a mat-menu-item [routerLink]="moreEllipsisItems[0].path"><mat-icon>settings</mat-icon>Configuration</a>
+    <a mat-menu-item [routerLink]="moreEllipsisItems[1].path"><mat-icon>help</mat-icon>Help</a>
+  </mat-menu>
+  <mat-sidenav-container class="sidenav-container">
+    <mat-sidenav #sidenav 
+                 mode="side"
+                 [fixedInViewport]="true" 
+                 fixedTopGap="64">
+      <mat-nav-list color="primary">
+          <a mat-list-item routerLink="{{nav.path}}" routerLinkActive="active" *ngFor="let nav of navItems">{{nav.title}}</a>
+      </mat-nav-list>
+    </mat-sidenav>  
+    <mat-sidenav-content class="main-content-container">
+      <router-outlet></router-outlet>
+    </mat-sidenav-content>
+  </mat-sidenav-container>

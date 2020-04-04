@@ -9,7 +9,6 @@ import { SearchComponent } from './components/subcomponents/search/search.compon
 import { RegistryComponent } from './components/registry/registry.component';
 import { ProfileComponent } from './profile/profile.component';
 import { AuthGuard } from './core/services/auth/auth.guard';
-import { LoginComponent } from './components/login/login.component';
 
 
 const routes: Routes = [
@@ -19,8 +18,6 @@ const routes: Routes = [
           data: { title: 'RepositoryNook UI', leftNavBar: true} },
   { path: 'config', component: ConfigComponent,
           data: { title: 'Configuration', leftNavBar: false} },
-  { path: 'login', component: LoginComponent,
-          data: { title: 'Auth0 Login', leftNavBar: false}},
   { path: 'help', component: HelpComponent,
           data: { title: 'Help', leftNavBar: false} },
   { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard] },
@@ -37,7 +34,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes, {onSameUrlNavigation: 'reload'})], //https://stackoverflow.com/questions/40983055/how-to-reload-the-current-route-with-the-angular-2-router
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

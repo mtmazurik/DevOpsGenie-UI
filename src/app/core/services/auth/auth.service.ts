@@ -77,11 +77,11 @@ export class AuthService {
     // (e.g., from a route guard)
     // Ensure Auth0 client instance exists
     this.auth0Client$.subscribe((client: Auth0Client) => {
-      // Call method to log in
-      client.loginWithRedirect({
+//       client.loginWithPopup()
+       client.loginWithRedirect({
         redirect_uri: `${window.location.origin}`,
         appState: { target: redirectPath }
-      });
+      }); 
     });
   }
 

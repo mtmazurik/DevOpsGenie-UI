@@ -7,7 +7,7 @@ import { NotificationService } from '../../core/services/notification.service';
     styleUrls: ['./home.component.scss']
 })
 //
-// Home component is going to be a documents window, list & query, for viewing MongoDB documents metadata (initially), CRUD later
+// Home component is a documents window, list & query, for viewing MongoDB documents metadata (initially), CRUD later
 //
 export class HomeComponent {
     constructor(public authSvc:AuthService, public notify:NotificationService) { }

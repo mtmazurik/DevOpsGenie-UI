@@ -21,8 +21,7 @@ import { DocumentComponent } from './components/subcomponents/document/document.
 import { DocumentsComponent } from './components/documents/documents.component';
 import { HelpComponent } from './components/help/help.component';
 import { ProfileComponent } from './profile/profile.component';
-import { NavBarComponent } from './components/navbar/navbar.component';
-import { LoginComponent } from './components/login/login.component';
+import { NavBarsComponent } from './components/navbars/navbars.component';
 
 @NgModule({
   declarations: [
@@ -35,8 +34,7 @@ import { LoginComponent } from './components/login/login.component';
     DocumentComponent,
     DocumentsComponent,
     HelpComponent,
-    NavBarComponent,
-    LoginComponent
+    NavBarsComponent
   ],
   imports: [
     AppRoutingModule,
