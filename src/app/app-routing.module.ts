@@ -12,24 +12,39 @@ import { AuthGuard } from './core/services/auth/auth.guard';
 
 
 const routes: Routes = [
-  { path: '', component: HomeComponent,
-          data: { title: 'RepositoryNook UI', leftNavBar: true}},
-  { path: 'home', component: HomeComponent,
-          data: { title: 'RepositoryNook UI', leftNavBar: true} },
-  { path: 'config', component: ConfigComponent,
-          data: { title: 'Configuration', leftNavBar: false} },
-  { path: 'help', component: HelpComponent,
-          data: { title: 'Help', leftNavBar: false} },
-  { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard] },
-  { path: 'registry', component: RegistryComponent,
-          data: { title: 'Registry selection', leftNavBar: false} },
+  { path: '', 
+    component: HomeComponent,
+    data: { title: 'RepositoryNook UI', leftNavBar: true}},
+  { path: 'home', 
+    component: HomeComponent,
+    data: { title: 'RepositoryNook UI', leftNavBar: true} },
+  { path: 'config', 
+    component: ConfigComponent,
+    data: { title: 'Configuration', leftNavBar: false},
+    canActivate: [AuthGuard] 
+  },
+  { path: 'help', 
+    component: HelpComponent,
+    data: { title: 'Help', leftNavBar: false} 
+  },
+  { path: 'profile', 
+    component: ProfileComponent, 
+    canActivate: [AuthGuard] 
+  },
+  { path: 'registry', 
+    component: RegistryComponent,
+    data: { title: 'Registry selection', leftNavBar: false},
+    canActivate: [AuthGuard] 
+  },
   { path: 'documents', 
-          component: DocumentsComponent,
-          children: [
+    component: DocumentsComponent,
+    children: [
             { path: 'search', component: SearchComponent },
             { path: 'document', component: DocumentComponent }
           ],
-          data: { title: 'Documents', leftNavBar: false} },
+    data: { title: 'Documents', leftNavBar: false},
+    canActivate: [AuthGuard]
+  },
   { path: '**', redirectTo: ''}
 ];
 
